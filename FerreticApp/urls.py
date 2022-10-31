@@ -17,7 +17,6 @@ router.register('detallefactura',DetalleFactura_view,basename='detallefactura')
 
 
 urlpatterns = [
-    #path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('token',TokenProvider.as_view(), name='token'),
 ]
