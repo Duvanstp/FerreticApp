@@ -61,13 +61,13 @@ class Sucursal(models.Model):
 
 
 class Empleado(AbstractUser):
-    sucursal = models.ForeignKey(Sucursal, on_delete=models.PROTECT)
+    sucursal = models.ForeignKey(Sucursal, on_delete=models.PROTECT, default=1)
     nombre = models.CharField(max_length=50)
     apellidos = models.CharField(max_length=50)
     direccion = models.CharField(max_length=50)
     telefono = models.CharField(max_length=50)
     correo = models.CharField(max_length=50)
-    fecha_nacimiento = models.DateField()
+    fecha_nacimiento = models.DateField(auto_now_add=True)
     token = models.CharField(max_length=100,null=True,blank=True,default='')
 
     def __str__(self):
