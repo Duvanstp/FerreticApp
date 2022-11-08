@@ -1,9 +1,10 @@
-from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.authtoken.models import Token
-from rest_framework.response import Response
+from django.shortcuts import render
 from rest_framework import viewsets
 from Ferretic.serializers import *
 from Ferretic.models import *
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
 
 
 class Empresa_view(viewsets.ModelViewSet):
@@ -51,12 +52,13 @@ class DetalleFactura_view(viewsets.ModelViewSet):
     serializer_class = DetalleFactura_serializer
 
 class TokenProvider(ObtainAuthToken):
-    def post(self, request, *args,**kwargs):
-        serializer = self.serializer_class(data=request.data, context={'request':request})
+    def post(self,  request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data,context={'request': request})
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
-        token,create = Token.objects.get_or_create(user=user)
+        token,created = Token.objects.get_or_create(user=user)
         user.token = token.key
         user.save()
         empleado = Empleado_serializer(user)
         return Response(empleado.data)
+

@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-%75!1ev(mb+_00tyd01u%o#wvmsh$@qt-s79)zfi^udsgy6&l0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 AUTH_USER_MODEL = 'Ferretic.Empleado'
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOWS_METHODS = ['GET','OPTIONS','PATCH','POST','PUT','DELETE',]
+CORS_ALLOWS_CREDENTIALS = True
 
 
 # Application definition
@@ -40,6 +43,7 @@ INSTALLED_APPS = [
     'Ferretic.apps.FerreticConfig',
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'FerreticApp.urls'
