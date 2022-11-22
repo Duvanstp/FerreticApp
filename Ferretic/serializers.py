@@ -44,8 +44,11 @@ class Empleado_serializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = Empleado(
+            nombre=validated_data['nombre'],
+            apellidos=validated_data['apellidos'],
             direccion=validated_data['direccion'],
             username=validated_data['username'],
+            correo=validated_data['correo'],
             telefono=validated_data['telefono'],
             fecha_nacimiento=validated_data['fecha_nacimiento'],
         )
