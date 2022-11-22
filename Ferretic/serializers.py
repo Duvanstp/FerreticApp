@@ -44,10 +44,14 @@ class Empleado_serializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = Empleado(
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
+            email=validated_data['email'],
             direccion=validated_data['direccion'],
             username=validated_data['username'],
             telefono=validated_data['telefono'],
             fecha_nacimiento=validated_data['fecha_nacimiento'],
+            is_superuser=validated_data['is_superuser'],
         )
         user.set_password(validated_data['password'])
         user.save()
